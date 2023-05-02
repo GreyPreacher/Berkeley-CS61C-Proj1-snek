@@ -1,5 +1,5 @@
-# 61C Spring 2022 Project 1: Snake
+# Berkeley CS61C Spring 2022 Project 1: Snake
+👑 This is the Berkeley CS61C Spring 2022 Project1 snake by GreyPreacher(Alvin Zhang).
 
-Spec: [https://cs61c.org/sp22/projects/proj1/](https://cs61c.org/sp22/projects/proj1/)
-
-TODO: describe what you did
+# Main Page
+✨ Please go to the [main repository](https://github.com/GreyPreacher/Berkeley-CS61C) to see the full information of my Berkeley CS61C course.

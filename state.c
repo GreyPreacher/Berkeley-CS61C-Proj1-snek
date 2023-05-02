@@ -5,6 +5,9 @@
 #include "snake_utils.h"
 #include "state.h"
 
+#define BOARD_ROW 10
+#define BOARD_COL 14
+
 /* Helper function definitions */
 static char get_board_at(game_state_t* state, int x, int y);
 static void set_board_at(game_state_t* state, int x, int y, char ch);
@@ -30,13 +33,48 @@ static void set_board_at(game_state_t* state, int x, int y, char ch) {
 
 /* Task 1 */
 game_state_t* create_default_state() {
-  // TODO: Implement this function.
+    game_state_t* state = (game_state_t*)malloc(sizeof(game_state_t));
+    state->x_size = BOARD_COL;
+    state->y_size = BOARD_ROW;
+    state->board = (char**) malloc(sizeof(char*) * BOARD_ROW);
+    for (int i = 0; i < BOARD_ROW; ++i) {
+        state->board[i] = (char*)malloc(sizeof(char) * BOARD_COL);
+        if (i == 0 || i == BOARD_ROW - 1) {
+            memset(state->board[i], '#', sizeof(char) * BOARD_COL);
+        } else {
+            memset(state->board[i], ' ', sizeof(char) * BOARD_COL);
+            memset(state->board[i], '#', sizeof(char));
+            memset(state->board[i] + BOARD_COL - 1, '#', sizeof(char));
+        }
+    }
+    set_board_at(state, 9, 2, '*');
+    state->num_snakes = 1;
+    state->snakes = (snake_t*)malloc(sizeof(snake_t));
+    state->snakes[0].head_x = 5;
+    state->snakes[0].head_y = 4;
+    state->snakes[0].tail_x = 4;
+    state->snakes[0].tail_y = 4;
+    set_board_at(state, state->snakes[0].head_x, state->snakes[0].head_y, '>');
+    set_board_at(state, state->snakes[0].tail_x, state->snakes[0].tail_y, 'd');
+    state->snakes[0].live = true;
+    return state;
   return NULL;
 }
 
 /* Task 2 */
 void free_state(game_state_t* state) {
-  // TODO: Implement this function.
+    if (state) {
+      if (state->snakes) {
+          free(state->snakes);
+      }
+      for (int i = 0; i < state->y_size; ++i) {
+          if (state->board[i]) {
+              free(state->board[i]);
+          }
+      }
+      free(state->board);
+      free(state);
+  }
   return;
 }
 
